@@ -1,0 +1,33 @@
+<div class="col-2">
+    <table id="menubar" class="table table-hover text-center" role="button">
+        <tr>
+            <td onclick="location.href = '/'">소개 페이지</td>
+        </tr>
+        <tr>
+            <td>층별 안내</td>
+        </tr>
+        <tr>
+            <td>사진</td>
+        </tr>
+        <tr>
+            <td>찾아오시는 길</td>
+        </tr>
+      </table>
+</div>
+
+<style>
+    #menubar { 
+        position:absolute; top:80px;
+    }
+</style>
+
+<script>
+$(window).scroll(function(){
+    var scrollTop = $(document).scrollTop();
+    if (scrollTop < 180) {
+        scrollTop = 80;
+    }
+    $("#menubar").stop();
+    $("#menubar").animate( { "top" : scrollTop });
+});
+</script>
