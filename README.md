@@ -31,5 +31,19 @@
 </ul>
 
 ##### 제작 기간 : `2020.09.14 ~
+> Express-Generator 를 이용하여 초기제작하였다.
 
-##### Express-Generator 를 이용하여 초기제작하였다.
+## Router (예상)
+- hos (병원 소개)
+    - main (소개페이지)
+    - floor (층별안내)
+    - pic (사진)
+    - loc (병원 위치)
+
+- mng (고객 센터)
+    - rsrv (예약)
+    - faq (자주 묻는 질문)
+    - oq (1:1 문의)
+
+- admin (관리자)
+    - main (소켓, 응급환자 전용)

@@ -1,11 +1,18 @@
-<!--index.ejs-->
-<!DOCTYPE html>
-<html>
-<head>
-    <title><%= title %></title>
-    <script src="../socket.io-client/dist/socket.io.js"></script>
-    <script src="../jquery/dist/jquery.min.js"></script>
-</head>
-<body>d
-</body>
-</html>
+<%- include('include/header.ejs') %>
+<div class="thumbnail-wrapper">
+    <img class="flickr-srcd" src="https://farm1.static.flickr.com/121/276074021_43bc40b104_m.jpg" />
+</div>
+<section>
+    asdf<br><br>asdf<br><br>asdf<br><br>asdf<br><br>asdf<br><br>
+    asdf<br><br>asdf<br><br>asdf<br><br>asdf<br><br>asdf<br><br>
+    asdf<br><br>asdf<br><br>asdf<br><br>asdf<br><br>asdf<br><br>
+    asdf<br><br>asdf<br><br>asdf<br><br>asdf<br><br>asdf<br><br>
+</section>
+<%- include('include/footer.ejs') %>
+
+<style>
+    img.flickr-scrd:after {
+        content: url("images/flickr_logo-small-sideways.gif");
+        padding-left: 5px;
+    }
+</style>
