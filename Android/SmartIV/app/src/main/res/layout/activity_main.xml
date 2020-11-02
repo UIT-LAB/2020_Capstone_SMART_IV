@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TableLayout
+        android:id="@+id/dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#0E335F"
+        android:stretchColumns="0">
+
+        <TableRow
+            android:paddingBottom="60dp">
+            <RelativeLayout>
+                <TextView
+                    android:id="@+id/patientid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFF"
+                    android:textStyle="bold"
+                    android:textSize="19dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="김영재"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFF"
+                    android:textSize="19dp"
+                    android:layout_alignBaseline="@id/patientid"
+                    android:layout_toRightOf="@id/patientid"
+                    android:layout_marginTop="20dp"
+                    android:text="님의 심박수 ▶"/>
+
+                <TextView
+                    android:id="@+id/disease_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/patientid"
+                    android:layout_marginTop="15dp"
+                    android:textSize="14dp"
+                    android:textColor="#FFF"
+                    android:layout_alignLeft="@id/patientid"
+                    android:text="병 명 : "/>
+
+                <TextView
+                    android:id="@+id/disease_name_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFF"
+                    android:layout_below="@id/patientid"
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@+id/disease_name"
+                    android:textSize="14dp"
+                    android:text="질환 이름"/>
+
+                <TextView
+                    android:id="@+id/guardian_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFF"
+                    android:layout_below="@id/disease_name"
+                    android:layout_alignLeft="@id/patientid"
+                    android:layout_marginTop="7dp"
+                    android:textSize="14dp"
+                    android:text="보호자 : "/>
+
+                <TextView
+                    android:id="@+id/guardian_name_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFF"
+                    android:layout_below="@id/patientid"
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@+id/guardian_name"
+                    android:layout_alignBaseline="@id/guardian_name"
+                    android:textSize="14dp"
+                    android:text="보호자 이름"/>
+
+                <TextView
+                    android:id="@+id/family_doctor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFF"
+                    android:layout_below="@id/guardian_name"
+                    android:layout_alignLeft="@id/patientid"
+                    android:layout_marginTop="7dp"
+                    android:textSize="14dp"
+                    android:text="주치의 : "/>
+
+                <TextView
+                    android:id="@+id/family_doctor_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFF"
+                    android:layout_below="@id/patientid"
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@+id/family_doctor"
+                    android:layout_alignBaseline="@id/family_doctor"
+                    android:textSize="14dp"
+                    android:text="주치의 이름"/>
+
+                <com.dinuscxj.progressbar.CircleProgressBar
+                    android:id="@+id/healthLV"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_alignParentRight="true"
+                    app:style="solid_line"
+                    app:progress_stroke_width="5dp"
+                    app:progress_stroke_cap="round"
+                    app:progress_start_color="#27C672"
+                    app:progress_background_color="#255792"
+                    app:progress_text_size="16dp"/>
+            </RelativeLayout>
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout
+        android:id="@+id/info_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="160dp"
+        android:stretchColumns="0, 1">
+        <TableRow>
+
+            <Button
+                android:id="@+id/call"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:padding="15dp"
+                android:drawableLeft="@drawable/alert"
+                android:textSize="16dp"
+                android:background="@drawable/button_radius"
+                android:textColor="#FFF"
+                android:drawableTint="#FFF"
+                android:text="응급 호출"/>
+            <Button
+                android:id="@+id/patient_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:drawableLeft="@drawable/patient_info"
+                android:textSize="16dp"
+                android:background="@drawable/button_radius"
+                android:textColor="#FFF"
+                android:drawableTint="#FFF"
+                android:text="환자 정보"/>
+
+        </TableRow>
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/todayCheck_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/info_btn"
+        android:layout_marginTop="25dp"
+        android:layout_alignLeft="@id/info_btn"
+        android:layout_alignRight="@id/info_btn"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:text="오늘의 검사"/>
+
+    <TableLayout
+        android:id="@+id/todayCheck"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/todayCheck_txt"
+        android:elevation="5dp"
+        android:layout_alignLeft="@id/info_btn"
+        android:layout_alignRight="@id/info_btn"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:background="@drawable/check_table_form">
+
+        <TextView
+            android:id="@+id/check_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:text="1. CT 촬영 [ 담당의 : 외과 과장 송준하 ]\n\n2. 위 내시경 [ 담당의 : 내과 과장 이규환 ]"/>
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/today_medicine_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_below="@id/todayCheck"
+        android:layout_alignLeft="@id/todayCheck"
+        android:layout_alignRight="@id/todayCheck"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:text="복약 지도"/>
+
+    <TableLayout
+        android:id="@+id/today_medicine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/today_medicine_txt"
+        android:elevation="5dp"
+        android:layout_alignLeft="@id/info_btn"
+        android:layout_alignRight="@id/info_btn"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:background="@drawable/check_table_form">
+
+        <TextView
+            android:id="@+id/medicine_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:text="아침  [ 판피린티 정, 판콜에이 내복액 ]\n\n점심  [ 판크레아틴, 디아스타제 ]\n\n저녁  [ 코푸정, 아나록소정, 엑사딘캡슐 150mg ]"/>
+    </TableLayout>
+
+</RelativeLayout>

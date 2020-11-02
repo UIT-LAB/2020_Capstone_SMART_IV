@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_back"
+        android:paddingBottom="70dp" />
+
+    <TableLayout
+        android:id="@+id/loginForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/table_form"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="70dp"
+        android:elevation="20dp"
+        android:stretchColumns="0, 1, 2, 3,4,5,6,7,8">
+        <TableRow>
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="50dp"
+                android:paddingBottom="30dp"
+                android:src="@drawable/hoseopital"
+                android:layout_span="8"/>
+
+        </TableRow>
+
+        <TableRow
+            android:padding="20dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/id"
+                android:gravity="center"
+                android:layout_span="1"
+                app:tint="#3D45E4" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="50dp"
+                android:layout_span="7"/>
+        </TableRow>
+
+        <TableRow
+            android:padding="20dp"
+            android:layout_marginBottom="20dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pass2"
+                android:gravity="center"
+                android:layout_span="1"
+                app:tint="#3D45E4" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="50dp"
+                android:inputType="textPassword"
+                android:layout_span="7"/>
+        </TableRow>
+    </TableLayout>
+
+
+    <TableLayout
+        android:id="@+id/btn_form"
+        android:layout_below="@id/loginForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+
+        android:stretchColumns="0, 1">
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/loginbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="로그인"
+                android:textColor="#FFF"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/button_form" />
+
+            <Button
+                android:id="@+id/qrbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFF"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:text="QR 로그인"
+                android:background="@drawable/button_form"/>
+        </TableRow>
+
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/signuptxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#768CF1"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btn_form"
+        android:layout_above="@id/bottomview"
+        android:text="환자 등록"/>
+
+    <TextView
+        android:id="@+id/bottomview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_back"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="60dp" />
+
+
+
+</RelativeLayout>
