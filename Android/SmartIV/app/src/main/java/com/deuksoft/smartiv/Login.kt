@@ -12,6 +12,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.HashMap
 
 
 class Login : AppCompatActivity(), View.OnClickListener {
@@ -41,7 +47,7 @@ class Login : AppCompatActivity(), View.OnClickListener {
             R.id.qrbtn -> {
                 if (mBluetoothAdapter!!.isEnabled) {
                     val intentIntegrator = IntentIntegrator(this)
-                    intentIntegrator.setBeepEnabled(true) //바코드 인식시 소리
+                    intentIntegrator.setBeepEnabled(false) //바코드 인식시 소리
                     intentIntegrator.setOrientationLocked(false)
                     intentIntegrator.setPrompt("")
                     intentIntegrator.setCameraId(1)
@@ -55,6 +61,7 @@ class Login : AppCompatActivity(), View.OnClickListener {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
+                //getPatientInfo("74:9E:F5:81:8F:49")
             }
             R.id.logo -> {
                 bluetoothOn()
@@ -86,22 +93,23 @@ class Login : AppCompatActivity(), View.OnClickListener {
                     var contents : String = scanningResult.contents
                     var format : String = scanningResult.formatName
                     mPairedDevices = mBluetoothAdapter!!.getBondedDevices()
-
-                    if(mPairedDevices!!.size > 0){
+                    //Toast.makeText(this, "$contents, $format", Toast.LENGTH_LONG).show()
+                   if(mPairedDevices!!.size > 0){
                         for(tempDevice in mPairedDevices!!) {
-                            Log.e("addr : ", tempDevice.address)
-                            if (contents.equals(tempDevice.address)) {
+                            Log.e("addr : ", tempDevice.name)
+                            if (contents.equals(tempDevice.name)) {
                                 mBluetoothDevice = tempDevice
                                 Toast.makeText(this, "$contents, $format", Toast.LENGTH_LONG).show()
                                 val intent = Intent(this, MainActivity::class.java)
                                 intent.putExtra("PatientBluetooth", mBluetoothDevice)
                                 startActivity(intent)
-                                finish()
+                                //finish()
                                 break
                             }
                         }
-                        Toast.makeText(this, "일치하는 블루투스가 없습니다.", Toast.LENGTH_SHORT).show()
-                    }
+                    }else{
+                       Toast.makeText(this, "일치하는 블루투스가 없습니다.", Toast.LENGTH_SHORT).show()
+                   }
 
                 }
             }
@@ -120,6 +128,35 @@ class Login : AppCompatActivity(), View.OnClickListener {
                 startActivityForResult(intentBluetoothEnable, BT_REQUEST_ENABLE)
             }
         }
+    }
+
+    fun getPatientInfo(mac : String){
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://192.168.0.65:80/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(RetrofitInterface::class.java)
+        var sendmac = HashMap<String, String>()
+        sendmac.put("mac", mac)
+
+        service.getPatientInfo(sendmac).enqueue(object : Callback<List<PatientData>> {
+            override fun onFailure(call: Call<List<PatientData>>, t: Throwable) {
+                Log.d("CometChatAPI::", "Failed API call with call: ${call} exception: ${t}")
+            }
+
+            override fun onResponse(call: Call<List<PatientData>>, response: Response<List<PatientData>>) {
+                try{
+                    Log.e("get",response.body()!!.size.toString())
+                    for(i in 0..response.body()!!.size-1){
+                        Log.e("sfdsfsdfdsfsdfdsfsfsdfd", response.body()!!.get(i).toString())
+                    }
+                }catch (e : Exception){
+                    e.printStackTrace()
+                }
+            }
+
+        })
     }
 
 
