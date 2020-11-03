@@ -1,18 +1,12 @@
 <div class="col-2">
     <table id="menubar" class="table table-hover text-center" role="button">
-        <tr>
-            <td onclick="location.href = '/'">소개 페이지</td>
-        </tr>
-        <tr>
-            <td>층별 안내</td>
-        </tr>
-        <tr>
-            <td>사진</td>
-        </tr>
-        <tr>
-            <td>찾아오시는 길</td>
-        </tr>
+        <% for(key in menubar){%>
+            <tr>
+                <td onclick="location.href = '<%=menubar[key]%>'"><%=key%></td>
+            </tr>
+        <%}%>
       </table>
+
 </div>
 
 <style>
