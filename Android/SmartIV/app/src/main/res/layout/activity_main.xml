@@ -17,7 +17,7 @@
             android:paddingBottom="60dp">
             <RelativeLayout>
                 <TextView
-                    android:id="@+id/patientid"
+                    android:id="@+id/patientname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#FFF"
@@ -31,8 +31,8 @@
                     android:layout_height="wrap_content"
                     android:textColor="#FFF"
                     android:textSize="19dp"
-                    android:layout_alignBaseline="@id/patientid"
-                    android:layout_toRightOf="@id/patientid"
+                    android:layout_alignBaseline="@id/patientname"
+                    android:layout_toRightOf="@id/patientname"
                     android:layout_marginTop="20dp"
                     android:text="님의 심박수 ▶"/>
 
@@ -40,11 +40,11 @@
                     android:id="@+id/disease_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/patientid"
+                    android:layout_below="@id/patientname"
                     android:layout_marginTop="15dp"
                     android:textSize="14dp"
                     android:textColor="#FFF"
-                    android:layout_alignLeft="@id/patientid"
+                    android:layout_alignLeft="@id/patientname"
                     android:text="병 명 : "/>
 
                 <TextView
@@ -52,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#FFF"
-                    android:layout_below="@id/patientid"
+                    android:layout_below="@id/patientname"
                     android:layout_marginTop="15dp"
                     android:layout_toRightOf="@+id/disease_name"
                     android:textSize="14dp"
@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#FFF"
                     android:layout_below="@id/disease_name"
-                    android:layout_alignLeft="@id/patientid"
+                    android:layout_alignLeft="@id/patientname"
                     android:layout_marginTop="7dp"
                     android:textSize="14dp"
                     android:text="보호자 : "/>
@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#FFF"
-                    android:layout_below="@id/patientid"
+                    android:layout_below="@id/patientname"
                     android:layout_marginTop="15dp"
                     android:layout_toRightOf="@+id/guardian_name"
                     android:layout_alignBaseline="@id/guardian_name"
@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#FFF"
                     android:layout_below="@id/guardian_name"
-                    android:layout_alignLeft="@id/patientid"
+                    android:layout_alignLeft="@id/patientname"
                     android:layout_marginTop="7dp"
                     android:textSize="14dp"
                     android:text="주치의 : "/>
@@ -97,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#FFF"
-                    android:layout_below="@id/patientid"
+                    android:layout_below="@id/patientname"
                     android:layout_marginTop="15dp"
                     android:layout_toRightOf="@+id/family_doctor"
                     android:layout_alignBaseline="@id/family_doctor"
