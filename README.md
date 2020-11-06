@@ -4,7 +4,7 @@
 ## 제작 인원
 
 <ul>
-    <li>웹 및 심박센서 제작</li>
+    <li>웹(Front-end, Server) 및 심박센서측정, Arduino-nano Bluetooth통신</li>
     <ul>
         <li>김영재</li>
     </ul>
@@ -22,14 +22,14 @@
     </ul>
 </ul>
 <ul>
-    <li>비콘</li>
+    <li>비콘, 모터 작동</li>
     <ul>
         <li>김득회</li>
         <li>이규환</li>
     </ul>
 </ul>
 <ul>
-    <li>모터</li>
+    <li>모터 작동</li>
     <ul>
         <li>권순영</li>
         <li>정승원</li>
@@ -39,7 +39,7 @@
 ##### 제작 기간 : `2020.09.14 ~
 > Express-Generator 를 이용하여 초기제작하였다.
 
-## Router (예상)
+## Router (수정 중)
 - hos (병원 소개)
     - main (소개페이지)
     - floor (층별안내)

@@ -1,17 +1,32 @@
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=33f86004ad2583cdbecdf689ccc71929"></script>
 <%- include('../include/header.ejs') %>
+<link rel="stylesheet" href="/stylesheets/mng.css"/>
 <section>
     <div id="info_content" class="row mt-4 pl-2">
         <%- include('../include/menubar.ejs') %>
-        <div id="content" class="col pl-5">
-            소개 페이지<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
+        <div id="content" class="col text-center">
+            <h1 id="content_header">찾아오시는 길</h1>
+            호서대학교<br>
+            제2공학관 421호 UIT-LAB<br>
+           <div id="map" style="width:500px;height:400px;"></div>
         </div>
     </div>
 </section>
 <%- include('../include/footer.ejs') %>
+
+<script>
+    var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+    var options = { //지도를 생성할 때 필요한 기본 옵션
+        center: new kakao.maps.LatLng(36.736504, 127.073108), //지도의 중심좌표.
+        level: 3 //지도의 레벨(확대, 축소 정도)
+    };
+
+    var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+</script>
+
+<style>
+    #map{
+        margin-top:5%;
+        display: inline-block;
+    }
+</style>
