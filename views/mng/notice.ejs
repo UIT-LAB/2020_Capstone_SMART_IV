@@ -1,0 +1,46 @@
+<%- include('../include/header.ejs') %>
+<link rel="stylesheet" href="/stylesheets/mng.css"/>
+<section>
+    <div id="info_content" class="row mt-4 pl-2">
+        <%- include('../include/menubar.ejs') %>
+        <div id="content" class="col text-center">
+            <h1 id="content_header">공지사항</h1>
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">순 번</th>
+                    <th scope="col">제 목</th>
+                    <th scope="col">작 성 자</th>
+                    <th scope="col">조 회 수</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <%for(key in db_data){%>
+                        <tr>
+                            <th scope="row"><%=db_data[key].nid%></th>
+                            <td><%=db_data[key].title%></td>
+                            <td><%=db_data[key].writer%></td>
+                            <td><%=db_data[key].hit%></td>
+                        </tr>
+                    <%}%>                  
+                </tbody>
+              </table>                 
+            
+        </div>
+    </div>
+</section>
+<%- include('../include/footer.ejs') %>
+
+<style>
+    #content{
+        max-width:90%;
+        padding:0;
+        margin-left:50px
+    }
+    .contents{
+        color:red;
+    }
+    section{
+        width:90%;
+    }
+</style>

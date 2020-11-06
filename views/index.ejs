@@ -27,57 +27,99 @@
                 <h4>병원 소개</h4>
                 소개소개!<br>
                 병원 소개에 대해 짓껄인 말을 들어봐요.<br>
-                <button type="button" class="btn btn-info">확인하기 &gt;</button>
+                <button type="button" class="btn btn-info" onclick="location.href='/hos/main'">확인하기 &gt;</button>
             </div>
             <div class="col text-white">
                 <h4>층별 안내</h4>
                 1층 2층 3층!<br>
-                ㅋㅋ 사실 아무것도 없다.
-                <button type="button" class="btn btn-info">확인하기 &gt;</button>
+                ㅋㅋ 
+                <button type="button" class="btn btn-info" onclick="location.href='/hos/floor'">확인하기 &gt;</button>
             </div>
             <div class="col text-white">
                 <h4>4진</h4>
                 4진이 정말 많군요!<br>
-                사진도 모두 구라입니다.
-                <button type="button" class="btn btn-info">확인하기 &gt;</button>
+                와! 사진!!
+                <button type="button" class="btn btn-info" onclick="location.href='/hos/pic'">확인하기 &gt;</button>
             </div>
         </div>
         <div class="row">
             <div class="col text-white">
-                <h4>4진</h4>
-                4진이 정말 많군요!<br>
-                사진도 모두 구라입니다.
-                <button type="button" class="btn btn-info">확인하기 &gt;</button>
+                <h4>faq</h4>
+                자주 묻는 질문!<br>
+                1:1 문의하기 전에 여길 먼저 보세요!
+                <button type="button" class="btn btn-info" onclick="location.href='/mng/faq'">확인하기 &gt;</button>
             </div>
             <div class="col text-white">
-                <h4>4진</h4>
-                4진이 정말 많군요!<br>
-                사진도 모두 구라입니다.
-                <button type="button" class="btn btn-info">확인하기 &gt;</button>
+                <h4>1:1문의</h4>
+                1:1문의사항을 올려보세요
+                <button type="button" class="btn btn-info" onclick="location.href='/mng/oq'">확인하기 &gt;</button>
             </div>
             <div class="col text-white">
-                <h4>4진</h4>
-                4진이 정말 많군요!<br>
-                사진도 모두 구라입니다.
-                <button type="button" class="btn btn-info">확인하기 &gt;</button>
+                <h4>진료 예약</h4>
+                내가 먼저 받고싶으면 예약을 하세요.<br>
+                <button type="button" class="btn btn-info" onclick="location.href='/mng/rsrv'">확인하기 &gt;</button>
             </div>
         </div>
     </div>
-    asdf<br><br>asdf<br><br>asdf<br><br>asdf<br><br>asdf<br><br>
-    asdf<br><br>asdf<br><br>asdf<br><br>asdf<br><br>asdf<br><br>
-    asdf<br><br>asdf<br><br>asdf<br><br>asdf<br><br>asdf<br><br>
-    asdf<br><br>asdf<br><br>asdf<br><br>asdf<br><br>asdf<br><br>
+    <div class="container mt-5">
+        <div class="row row-cols-2">
+          <div class="col table-responsive-md">
+              <h4 class="mb-4" style="cursor: pointer;" onclick="location.href='/mng/notice'">공지사항</h4>
+            <table class="table pd-0 table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">제목</th>
+                        <th scope="col">조회수</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%for(key in db_data){%>
+                        <tr>
+                            <th scope="row"><%=db_data[key].title%></th>
+                            <td><%=db_data[key].hit%></td>
+                        </tr>
+                    <%}%>
+                </tbody>
+            </table>
+          </div>
+          <div class="col table-responsive-md">
+            <h4 class="mb-4">FAQ</h4>
+            <table class="table pd-0 table-hover">
+                <thead >
+                    <tr>
+                        <th scope="col">제목</th>
+                        <th scope="col">조회수</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">[공지] ㅋㅋ루삥뽕에 관련된 사항입니다.</th>
+                        <td>196</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">[안내] ㅎㅇㄹㅎㅇㅎㅇㄹㄹㄹㄹㅇㄹ</th>
+                        <td>54</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">[필독] 이곳에서 커뮤니티를 하면서 지켜야 할 사항</th>
+                        <td>243</td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 </section>
 <%- include('include/footer.ejs') %>
 
 <style>
     #carouselControls img{
-        height:500px;
+        height:700px;
         position: relative; 
         z-index: 1;
     }
     section{
-        position: relative; top: -80px; z-index: 2;
+        position: relative; top: -210px; z-index: 2;
     }
     .col{
         height:200px;
@@ -86,7 +128,7 @@
         padding-top:1rem;
     }
     .col:hover{
-        border: 1px white solid;
+        /* border: 3px white solid; */
     }
     .col>button{
         position:absolute;
@@ -94,10 +136,16 @@
         left: 50%;
         margin: -50px 0 0 -50px;
     }
+    th:nth-child(2){
+        width:30%
+    }
+    tbody tr, tfoot tr{
+        cursor: pointer;
+    }
 </style>
 <script>
     var colors = [
-        "rgb(182, 186, 153)",
+        "rgb(182,186,153)",
         "rgb(175,201,194)",
         "rgb(145,167,208)",
         "rgb(190,198,213)",
