@@ -1,17 +1,32 @@
 <%- include('../include/header.ejs') %>
+<link rel="stylesheet" href="/stylesheets/mng.css"/>
 <section>
     <div id="info_content" class="row mt-4 pl-2">
         <%- include('../include/menubar.ejs') %>
-        <div id="content" class="col pl-5">
-            소개 페이지<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
+        <div id="content" class="col">
+            <h1 id="content_header" class="text-center">자주 묻는 질문?</h1>
+            <%for(key in db_data){%>
+                <details>
+                    <summary><%=db_data[key].title%></summary>
+                    <div class="contents">ㄴ&nbsp;<%=db_data[key].contents%></div>
+                </details>
+                <br>
+            <%}%>
         </div>
     </div>
 </section>
 <%- include('../include/footer.ejs') %>
+
+<style>
+    #content{
+        max-width:90%;
+        padding:0;
+        margin-left:50px
+    }
+    .contents{
+        color:red;
+    }
+    section{
+        width:90%;
+    }
+</style>
