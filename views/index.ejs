@@ -73,10 +73,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <%for(key in db_data){%>
+                    <%for(key in notice_db_data){%>
                         <tr>
-                            <th scope="row"><%=db_data[key].title%></th>
-                            <td><%=db_data[key].hit%></td>
+                            <th scope="row"><%=notice_db_data[key].title%></th>
+                            <td><%=notice_db_data[key].hit%></td>
                         </tr>
                     <%}%>
                 </tbody>
@@ -85,25 +85,17 @@
           <div class="col table-responsive-md">
             <h4 class="mb-4">FAQ</h4>
             <table class="table pd-0 table-hover">
-                <thead >
+                <thead>
                     <tr>
                         <th scope="col">제목</th>
-                        <th scope="col">조회수</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">[공지] ㅋㅋ루삥뽕에 관련된 사항입니다.</th>
-                        <td>196</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">[안내] ㅎㅇㄹㅎㅇㅎㅇㄹㄹㄹㄹㅇㄹ</th>
-                        <td>54</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">[필독] 이곳에서 커뮤니티를 하면서 지켜야 할 사항</th>
-                        <td>243</td>
-                    </tr>
+                    <%for(key in faq_db_data){%>
+                        <tr>
+                            <th scope="row"><%=faq_db_data[key].title%></th>
+                        </tr>
+                    <%}%>
                 </tbody>
             </table>
           </div>
@@ -127,9 +119,9 @@
         text-align: center;
         padding-top:1rem;
     }
-    .col:hover{
-        /* border: 3px white solid; */
-    }
+    /* .col:hover{
+        border: 3px white solid;
+    } */
     .col>button{
         position:absolute;
         bottom:5px;
