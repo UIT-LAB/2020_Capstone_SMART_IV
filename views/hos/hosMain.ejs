@@ -1,24 +1,34 @@
 <%- include('../include/header.ejs') %>
+<link rel="stylesheet" href="/stylesheets/mng.css"/>
 <section>
     <div id="info_content" class="row mt-4 pl-2">
         <%- include('../include/menubar.ejs') %>
-        <div id="content" class="col pl-5">
-            <h1 id="content_header" class="text-center">소개 페이지</h1>
-            여기는 호서피탈에 관한 설명을 쓸 거에요. <br><br><br><br><br>
-            아시겠어요?<br><br><br><br><br>
-            아시겠냐구요<br><br><br><br><br>
-            여기는 호서피탈에 관한 설명을 쓸 거에요. <br><br><br><br><br>
-            아시겠어요?<br><br><br><br><br>
-            아시겠냐구요<br><br><br><br><br>
-            여기는 호서피탈에 관한 설명을 쓸 거에요. <br><br><br><br><br>
-            아시겠어요?<br><br><br><br><br>
-            아시겠냐구요<br><br><br><br><br>
-            여기는 호서피탈에 관한 설명을 쓸 거에요. <br><br><br><br><br>
-            아시겠어요?<br><br><br><br><br>
-            아시겠냐구요<br><br><br><br><br>
+        <div id="content" class="col text-center">
+            <h1 id="content_header">병 원 소 개</h1>
+           <img src="/images/hospital_info.jpg">
+           <div class="img_text">
+               <h1>Hoseo Pital</h1>
+                <b>
+                    기부니가 좋은 병원,<br> 믿을 수 없는 병원.<br>
+                    호서병원은 언제나 당신 곁에 없습니다.<br>
+                    다른 병원 알아보세요.
+                </b>
+           </div>
         </div>
     </div>
 </section>
 <%- include('../include/footer.ejs') %>
-
-
+<style>
+    img{
+        max-width:100%;
+        opacity: 30%;
+	    vertical-align: middle;
+    }
+    .img_text {
+        text-align: center;
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        transform: translate( -50%, -50% );
+    }
+</style>
