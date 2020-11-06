@@ -5,13 +5,26 @@
         <%- include('../include/menubar.ejs') %>
         <div id="content" class="col">
             <h1 id="content_header" class="text-center">자주 묻는 질문?</h1>
-            <%for(key in db_data){%>
-                <details>
-                    <summary><%=db_data[key].title%></summary>
-                    <div class="contents">ㄴ&nbsp;<%=db_data[key].contents%></div>
-                </details>
-                <br>
-            <%}%>
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th class="text-center" scope="col" width="10%">순 번</th>
+                    <th scope="col">제 목</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <%for(key in db_data){%>
+                        <tr id="faq_title" onclick="show('faq_contents<%=db_data[key].fid%>')">
+                            <th class="text-center" scope="row"><%=db_data[key].fid%></th>
+                            <td><%=db_data[key].title%></td>
+                        </tr>
+                        <tr id="faq_contents<%=db_data[key].fid%>" class="fc"> 
+                            <td></td>
+                            <td colspan="2"><%=db_data[key].contents%></td>
+                        </tr>
+                    <%}%>                  
+                </tbody>
+              </table>
         </div>
     </div>
 </section>
@@ -29,4 +42,25 @@
     section{
         width:90%;
     }
+    /* #content tbody>tr:nth-child(2){
+       color:red;
+    } */
+    .fc{
+        display:none;
+    }
 </style>
+<script>
+    let showMap = new Map();
+
+    function show(ev){
+        //console.log(document.getElementById(ev));
+        if(showMap.get(ev)){
+            document.getElementById(ev).style.display= "none";
+            showMap.delete(ev);
+        }else{
+            document.getElementById(ev).style.display= "table-row";
+             document.getElementById(ev).setAttribute('colspan', 2);
+            showMap.set(ev, true);
+        }
+    }
+</script>
