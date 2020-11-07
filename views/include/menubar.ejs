@@ -1,8 +1,10 @@
 <div class="col-2">
-    <table id="menubar" class="table table-hover text-center" role="button">
+    <table id="menubar" class="table table-hover table-info text-center" role="button">
         <% for(key in menubar){%>
             <tr>
-                <td onclick="location.href = '<%=menubar[key]%>'"><%=key%></td>
+                <td onclick="location.href = '<%=menubar[key]%>'">
+                    <%=key%> &gt;&gt;
+                </td>
             </tr>
         <%}%>
       </table>
