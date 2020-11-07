@@ -1,16 +1,40 @@
+<%
+    var images = [
+        {
+            "imgsrc" : "1.jpg",
+            "title" : "HEADER 1",
+            "content" : "CONTent 1"
+        },{
+            "imgsrc" : "2.jpg",
+            "title" : "HEADER 2",
+            "content" : "CONTent 2"
+        },{
+            "imgsrc" : "3.jpg",
+            "title" : "HEADER 3",
+            "content" : "CONTent 3"
+        }
+    ]
+%>
+
 <%- include('../include/header.ejs') %>
+<link rel="stylesheet" href="/stylesheets/mng.css" />
 <section>
     <div id="info_content" class="row mt-4 pl-2">
         <%- include('../include/menubar.ejs') %>
-        <div id="content" class="col pl-5">
-            소개 페이지<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
+        <div id="content" class="col text-center">
+            <h1 id="content_header">병원 갤러리</h1>
+            <div class="row row-cols-1 row-cols-md-2">
+                <%for(key in images){%>
+                    <div class="col mb-4">
+                        <div class="card">
+                            <img src="/images/<%=images[key].imgsrc%>" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title"><%=images[key].title%></h5>
+                                <p class="card-text"><%=images[key].content%></p>
+                            </div>
+                        </div>
+                    </div>
+                <%}%>
         </div>
     </div>
 </section>
