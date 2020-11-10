@@ -1,18 +1,51 @@
 <%- include('../include/header.ejs') %>
 <link rel="stylesheet" href="/stylesheets/mng.css"/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.simple-calendar.js"></script>
+<link rel="stylesheet" type="text/css" href="/stylesheets/simple-calendar.css" />
+
 <section>
     <div id="info_content" class="row mt-4 pl-2">
         <%- include('../include/menubar.ejs') %>
         <div id="content" class="col pl-5">
-            소개 페이지<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
-            앞으로 해야할 리스트<br><br><br><br><br><br>
+            <h1 id="content_header" class="text-center">예약 현황 보기</h1>
+            <div id="container">
+
+            </div>
         </div>
     </div>
 </section>
 <%- include('../include/footer.ejs') %>
+
+<script>
+$(document).ready(function(){
+    $("#container").simpleCalendar({
+        //Defaults options below
+        //string of months starting from january
+        months: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+        days: ['일','월','화','수','목','금','토'],
+        displayYear: true,              // Display year in header
+        fixedStartDay: true,            // Week begin always by monday or by day set by number 0 = sunday, 7 = saturday, false = month always begin by first day of the month
+        displayEvent: true,             // Display existing event
+        disableEventDetails: false, // disable showing event details
+        disableEmptyDetails: false, // disable showing empty date details
+        events: [
+            {
+                startDate: "2020-11-10 15:00",
+                endDate: "2020-11-10 16:00",
+                summary: "김득회 수술"
+            },{
+                startDate: "2020-11-10 17:00",
+                endDate: "2020-11-10 18:00",
+                summary: "권순영 수술"
+            }
+        ],                     // List of events
+        onInit: function (calendar) {}, // Callback after first initialization
+        onMonthChange: function (month, year) {}, // Callback on month change
+        onDateSelect: function (date, events) {}, // Callback on date selection
+        onEventSelect: function() {}, // Callback on event selection - use $(this).data('event') to access the event
+        onEventCreate: function( $el ) {},          // Callback fired when an HTML event is created - see $(this).data('event')
+        onDayCreate:   function( $el, d, m, y ) {}  // Callback fired when an HTML day is created   - see $(this).data('today'), .data('todayEvents')
+    });
+});
+</script>
