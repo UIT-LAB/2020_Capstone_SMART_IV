@@ -1,6 +1,6 @@
 #include <SoftwareSerial.h> 
 
-SoftwareSerial BTSerial(A3, A5); // 소프트웨어 시리얼 (TX,RX)
+SoftwareSerial BTSerial(A4, A5); // 소프트웨어 시리얼 (TX,RX)
 
 int PulseSensorPurplePin = 0;
 int Signal;
