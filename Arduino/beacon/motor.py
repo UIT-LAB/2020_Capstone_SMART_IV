@@ -106,7 +106,7 @@ while True:
             else if int(patient.RSSI) > - 80:
                 setMotor(CH1, 66, GO)
             else:
-	   setMotor(CH1, 100, GO)
+				setMotor(CH1, 100, GO)
 
 GPIO.cleanup()
 
