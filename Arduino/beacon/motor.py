@@ -100,12 +100,13 @@ while True:
             print("distance = {0}".format(patient.distance(RSSI, TX)*100))
             print("patient: {0}".format( patient.devName))
 
-            setMotor(CH1, 66, GO)
-
-            '''if int(patient.RSSI) < -40 and int(patient.RSSI) > -70:
-                setMotor(CH1, 80, GO)
+            
+            if int(patient.RSSI) > -50:
+                setMotor(CH1, 80, STOP)
+            else if int(patient.RSSI) > - 80:
+                setMotor(CH1, 66, GO)
             else:
-                setMotor(CH1, 60, GO)'''
+	   setMotor(CH1, 100, GO)
 
 GPIO.cleanup()
 
