@@ -96,17 +96,17 @@ while True:
             patient = beacons("", "", "")
             distance = 0
             patient = beacons(devName, RSSI, TX)
-            print("patient devName = {0}, patient RSSI = {1}, patient TX = {2}"$
+            print("patient devName = {0}, patient RSSI = {1}, patient TX = {2}".format(patient.devName, patient.RSSI, patient.TX))
             print("distance = {0}".format(patient.distance(RSSI, TX)*100))
             print("patient: {0}".format( patient.devName))
 
             
-            if int(patient.RSSI) > -50:
+           if int(patient.RSSI) > -50:
                 setMotor(CH1, 80, STOP)
-            else if int(patient.RSSI) > - 80:
+           elif int(patient.RSSI) > -80:
                 setMotor(CH1, 66, GO)
-            else:
-				setMotor(CH1, 100, GO)
+           else:
+                setMotor(CH1, 100, GO)
 
 GPIO.cleanup()
 
