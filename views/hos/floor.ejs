@@ -1,15 +1,15 @@
 <%
     var floor = [
         {
-            "images" : ["1.jpg", "2.jpg"],
+            "images" : ["floor/floor1-1.jpg", "floor/floor1-2.jpg"],
             "header" : ["this is 1", "this is 2"],
             "content" : ["hello 1", "hello 2"]
         },{
-            "images" : ["2.jpg", "3.jpg"],
+            "images" : ["floor/floor2-1.jpg", "floor/floor2-2.jpg"],
             "header" : ["this is 2", "this is 3"],
             "content" : ["hello 2", "hello 3"]
         },{
-            "images" : ["1.jpg", "3.jpg"],
+            "images" : ["floor/floor3-1.jpg", "floor/floor3-2.jpg"],
             "header" : ["this is 1", "this is 3"],
             "content" : ["hello 1", "hello 3"]
         }
@@ -35,10 +35,10 @@
                                 <div class="carousel-item">
                             <%}%>
                                 <img src="/images/<%=floor[key].images[num]%>" class="d-block w-100">
-                                <div class="carousel-caption d-none d-md-block">
+                                <!-- <div class="carousel-caption d-none d-md-block">
                                     <h5><%=floor[key].header[num]%></h5>
                                     <p><%=floor[key].content[num]%></p>
-                                </div>
+                                </div> -->
                             </div>
                         <%}%>
                     </div>
@@ -59,7 +59,7 @@
 
 <style>
     .carousel img{
-        height:15rem;
+        height:40rem;
     }
     .carousel{
         margin-bottom:50px;

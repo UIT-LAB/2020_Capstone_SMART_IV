@@ -25,20 +25,18 @@
         <div class="row">
             <div class="col text-white">
                 <h4>병원 소개</h4>
-                소개소개!<br>
-                병원 소개에 대해 짓껄인 말을 들어봐요.<br>
+                호서대학교 병원 소개<br>
+                병원 소개에 관한 글입니다.<br>
                 <button type="button" class="btn btn-info" onclick="location.href='/hos/main'">확인하기 &gt;</button>
             </div>
             <div class="col text-white">
                 <h4>층별 안내</h4>
-                1층 2층 3층!<br>
-                ㅋㅋ 
+                1층 2층 3층이 있으며, 이에 대한 사진입니다.<br> 
                 <button type="button" class="btn btn-info" onclick="location.href='/hos/floor'">확인하기 &gt;</button>
             </div>
             <div class="col text-white">
-                <h4>4진</h4>
-                4진이 정말 많군요!<br>
-                와! 사진!!
+                <h4>병원 갤러리</h4>
+                병원 이벤트, 전문의에 관련된 사진입니다.
                 <button type="button" class="btn btn-info" onclick="location.href='/hos/pic'">확인하기 &gt;</button>
             </div>
         </div>
@@ -51,12 +49,13 @@
             </div>
             <div class="col text-white">
                 <h4>1:1문의</h4>
-                1:1문의사항을 올려보세요
+                1:1문의사항을 올려보세요. <br>
+                관리자가 꼼꼼히 살펴본 후, 답변 드리겠습니다.
                 <button type="button" class="btn btn-info" onclick="location.href='/mng/oq'">확인하기 &gt;</button>
             </div>
             <div class="col text-white">
                 <h4>진료 예약</h4>
-                내가 먼저 받고싶으면 예약을 하세요.<br>
+                병원 스케쥴에 관련된 예약입니다.<br>
                 <button type="button" class="btn btn-info" onclick="location.href='/mng/rsrv'">확인하기 &gt;</button>
             </div>
         </div>
@@ -69,14 +68,14 @@
                 <thead>
                     <tr>
                         <th scope="col">제목</th>
-                        <th scope="col">조회수</th>
+                        <th scope="col">작성자</th>
                     </tr>
                 </thead>
                 <tbody>
                     <%for(key in notice_db_data){%>
-                        <tr>
+                        <tr onclick="location.href='/mng/notice'">
                             <th scope="row"><%=notice_db_data[key].title%></th>
-                            <td><%=notice_db_data[key].hit%></td>
+                            <td><%=notice_db_data[key].writer%></td>
                         </tr>
                     <%}%>
                 </tbody>
@@ -93,7 +92,7 @@
                 <tbody>
                     <%for(key in faq_db_data){%>
                         <tr>
-                            <th scope="row"><%=faq_db_data[key].title%></th>
+                            <th scope="row" onclick="location.href='/mng/faq'"><%=faq_db_data[key].title%></th>
                         </tr>
                     <%}%>
                 </tbody>
