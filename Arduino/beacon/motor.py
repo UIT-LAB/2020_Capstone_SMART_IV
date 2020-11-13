@@ -101,11 +101,11 @@ while True:
             print("patient: {0}".format( patient.devName))
 
             
-           if int(patient.RSSI) > -50:
+            if int(patient.RSSI) > -50:
                 setMotor(CH1, 80, STOP)
-           elif int(patient.RSSI) > -80:
+            elif int(patient.RSSI) > -80:
                 setMotor(CH1, 66, GO)
-           else:
+            else:
                 setMotor(CH1, 100, GO)
 
 GPIO.cleanup()
