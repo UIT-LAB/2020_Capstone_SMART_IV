@@ -93,7 +93,7 @@ while True:
 		if int(TX) > 0:
 			TX = str(-59)
 		if devName == "78:a5:04:28:bd:76":
-			
+
 			patient = beacons("", "", "")
 			distance = 0
 			patient = beacons(devName, RSSI, TX)
@@ -101,11 +101,10 @@ while True:
 			print("distance = {0}".format(patient.distance(RSSI, TX)*100))
 			print("patient: {0}".format( patient.devName))
 
-			if int(patient.RSSI) > -50:
-				setMotor(CH1, 80, STOP)
-			elif int(patient.RSSI) > -80:
-				setMotor(CH1, 66, GO)
+			if int(patient.RSSI) > -60:
+				setMotor(CH1, 65, STOP)
+			elif int(patient.RSSI) > -81:
+				setMotor(CH1, 66 ,GO)
 			else:
 				setMotor(CH1, 100, GO)
-
 GPIO.cleanup()
