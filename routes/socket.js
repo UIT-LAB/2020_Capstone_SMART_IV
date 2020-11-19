@@ -5,6 +5,9 @@ var dayjs = require('dayjs');
 
 var io = require('socket.io').listen(3100);
 
+var sendjson = {
+  res:"ok"
+}
 // 앱에서 심장박동 이상 발견 시 작동
 io.on('connection', function (socket) {
     console.log('connect1');
@@ -16,15 +19,19 @@ io.on('connection', function (socket) {
           }
           db_data[0].birth = dayjs(db_data[0].birth).format('YYYY-MM-DD');
           //console.log();
-          socket.broadcast.emit('emgc', '1');
+          socket.broadcast.emit('emgc', 'calldoc');
           socket.broadcast.emit('recMsg', {db_data});
-          res.json(db_data);
+          res.json(sendjson);
       });
     });
     router.post('/restart', function(req, res, next) {
-        socket.broadcast.emit('emgc', '2');
-        res.json('asdf');
+        socket.broadcast.emit('emgc', 'restart');
+        res.json(sendjson);
     });
+    router.post('/start', function(req, res, next) {
+      socket.broadcast.emit('emgc', 'start');
+      res.json(sendjson);
+  });
 });
 
 module.exports = router;
