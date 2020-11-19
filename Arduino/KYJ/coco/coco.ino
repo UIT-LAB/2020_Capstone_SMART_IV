@@ -13,8 +13,9 @@ void setup(){
 
 void loop(){
   Signal = analogRead(PulseSensorPurplePin); 
+  Signal = (Signal/10)+1;
   Serial.println(Signal);
-  delay(100);
+  delay(1000);
   
   while (BTSerial.available()){ 
     byte data = BTSerial.read();
