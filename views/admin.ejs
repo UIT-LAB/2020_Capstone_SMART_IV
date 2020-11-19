@@ -39,6 +39,9 @@
 </body>
 <script>
     var socket = io.connect('http://localhost:3100');
+    socket.on('asdf', function (data) {
+      console.log(data);
+    })
     socket.on('recMsg', function (data) {
         //alert(data.db_data.mac + '를 수신하였습니다!')
         //console.log(data.db_data);
@@ -54,7 +57,7 @@
         //console.log(data.comment)
         
         $('.modal-title').html(
-            data.db_data[0].name+"님 응급상황 발생!!!\n"
+            "<span style='color:blue'><u><b>"+data.db_data[0].name+"</b></u></span>님 응급상황 발생!!!\n"
         );
         $('.img_round').html(
            '<img src="/images/'+ data.db_data[0].img_src +'" style="width:100%"/>'
