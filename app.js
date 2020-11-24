@@ -17,6 +17,14 @@ var adminRouter = require('./routes/admin');
 var androidRouter = require('./routes/android');
 
 var app = express();
+var session = require('express-session');
+
+app.use(session({
+ secret: '@#@$CONATIVE#@$#$',
+ resave: false,
+ saveUninitialized: true
+}));
+
 // app.use(
 //   session({
 //     resave: false,

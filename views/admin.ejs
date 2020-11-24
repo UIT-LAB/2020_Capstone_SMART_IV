@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>as</title>
+    <title>관리자 페이지</title>
     <script src="../socket.io-client/dist/socket.io.js"></script>
     <script src="../jquery/dist/jquery.min.js"></script>
 
@@ -33,9 +33,33 @@
       </div>
     </div>
   </div>
-
+  <h1>Admin Page</h1>
+  <table align=center style="text-align:center">
+    <thead>
+      <tr>
+        <th>사진</th>
+        <th>환자명</th>
+        <th>생년월일</th>
+        <th>성별</th>
+        <th>폴대 작동 여부</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(key in db_data){%>
+        <tr>
+          <td><img src="/images/<%= db_data[key].img_src%>"/></td>
+          
+          <td><%= db_data[key].name%></td>
+          <td><%= dayjs(db_data[key].birth).format('YYYY-MM-DD');%></td>
+          <td><%= db_data[key].gender%></td>
+          <td><%= Boolean(db_data[key].bt_mac);%></td>
+        </tr>
+      <%}%>
+    </tbody>
+  </table>
+<!-- 
 <textarea rows="20" cols="30" id="chat"></textarea><br>
-<input type="text" id="user"><input type="button" value="msg submit" onclick="myOnClick()">
+<input type="text" id="user"><input type="button" value="msg submit" onclick="myOnClick()"> -->
 </body>
 <script>
     var socket = io.connect('http://localhost:3100');
@@ -118,3 +142,19 @@
         uniqueness: "원랜디를 자주 함."*/
 </script>
 </html>
+
+<style>
+  body{
+    padding:30px;
+  }
+  h1{text-align:center}
+  table{
+    width:100%;
+  }
+  table td, table th{
+    border:1px solid black;
+  }
+  tbody>tr>td:nth-child(1) img{
+    width:100px;
+  }
+</style>
