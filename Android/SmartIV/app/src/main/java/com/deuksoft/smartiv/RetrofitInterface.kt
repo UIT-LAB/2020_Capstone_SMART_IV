@@ -11,4 +11,22 @@ interface RetrofitInterface {
     fun getPatientInfo(
         @Body body: HashMap<String, String>
     ): Call<List<PatientData>>
+
+    @Headers("accept: application/json","content-type: application/json")
+    @POST("/socket/start")
+    fun startMoter(
+        @Body body: HashMap<String, String>
+    ):Call<getData>
+
+    @Headers("accept: application/json","content-type: application/json")
+    @POST("/socket/calldoc")
+    fun callDoctor(
+        @Body body: HashMap<String, String>
+    ):Call<getData>
+
+    @Headers("accept: application/json","content-type: application/json")
+    @POST("/socket/restart")
+    fun restart(
+        @Body body: HashMap<String, String>
+    ):Call<getData>
 }

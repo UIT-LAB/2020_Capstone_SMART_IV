@@ -7,10 +7,12 @@ import android.os.Handler
 import android.os.Message
 import android.os.SystemClock
 import android.util.Log
-import android.widget.TextView
-import android.widget.Toast
+import android.view.View
+import android.widget.*
+import android.widget.CompoundButton.OnCheckedChangeListener
 import androidx.appcompat.app.AppCompatActivity
 import com.dinuscxj.progressbar.CircleProgressBar
+import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,7 +25,7 @@ import java.io.UnsupportedEncodingException
 import java.util.*
 
 
-class MainActivity : AppCompatActivity(), CircleProgressBar.ProgressFormatter{
+class MainActivity : AppCompatActivity(), CircleProgressBar.ProgressFormatter, View.OnClickListener, OnCheckedChangeListener{
     var mBluetoothDevice: BluetoothDevice? = null
     var mBluetoothSocket: BluetoothSocket? = null
     var mBluetoothHandler: Handler? = null
@@ -44,6 +46,9 @@ class MainActivity : AppCompatActivity(), CircleProgressBar.ProgressFormatter{
         setContentView(R.layout.activity_main)
 
         var healthLV : CircleProgressBar = findViewById(R.id.healthLV)
+        var call : Button = findViewById(R.id.call)
+        var patient_info: Button = findViewById(R.id.patient_info)
+        var driveSW : Switch = findViewById(R.id.driveSW)
         patientname = findViewById(R.id.patientname)
         disease_name_txt = findViewById(R.id.disease_name_txt)
         guardian_name_txt = findViewById(R.id.guardian_name_txt)
@@ -57,9 +62,12 @@ class MainActivity : AppCompatActivity(), CircleProgressBar.ProgressFormatter{
                 mBluetoothSocket!!.connect()
                 mThreadConnectedBluetooth = ConnectedBluetoothThread(mBluetoothSocket)
                 mThreadConnectedBluetooth!!.start()
+                startMoter(mBluetoothDevice!!.address)
+                driveSW.isChecked = true
                 //mBluetoothHandler!!.obtainMessage(BT_CONNECTING_STATUS, 1, -1).sendToTarget();
             }catch (e: IOException){
                 Log.e("error",e.toString())
+                startMoter(mBluetoothDevice!!.address)
                 Toast.makeText(getApplicationContext(), "블루투스 연결 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
             }
 
@@ -79,22 +87,57 @@ class MainActivity : AppCompatActivity(), CircleProgressBar.ProgressFormatter{
                     } catch (e: UnsupportedEncodingException) {
                         e.printStackTrace()
                     }
-                    healthLV.progress = Integer.parseInt(arr?.get(0).toString().trim())
-                    healthLV.max = 1000
-
+                    var btbpm = arr?.get(0).toString().trim()
+                    if(btbpm.equals("")){
+                        btbpm = "0"
+                    }
+                    var bpm:Int = Integer.parseInt(btbpm)
+                    healthLV.progress = bpm
+                    healthLV.max = 200
+                    if(20< bpm && bpm < 40){
+                        callDoctor(mBluetoothDevice!!.address)
+                        driveSW.isChecked = false
+                    }
                 }
             }
         }
         getPatientInfo(mBluetoothDevice!!.address)
         healthLV.setProgressFormatter(this)
+        call.setOnClickListener(this)
+        patient_info.setOnClickListener(this)
         /*healthLV.setProgressFormatter { progress, max ->
             val DEFAULT_PATTERN = "%d BPM"
             String.format(DEFAULT_PATTERN, progress)
         }*/
     }
+
+    override fun onClick(addr: View?) {
+        when(addr!!.id){
+            R.id.call ->{
+                callDoctor(mBluetoothDevice!!.address)
+                driveSW.isChecked = false
+            }
+            R.id.patient_info->{
+                restart(mBluetoothDevice!!.address)
+                driveSW.isChecked = true
+            }
+        }
+    }
+
     override fun format(progress: Int, max: Int): CharSequence? {
         val DEFAULT_PATTERN = "%d BPM"
         return java.lang.String.format(DEFAULT_PATTERN, progress)
+    }
+
+    override fun onCheckedChanged(sw: CompoundButton?, isChecked: Boolean) {
+        when(sw!!.id){
+            R.id.driveSW->{
+                Log.e("isbool", isChecked.toString())
+                if(isChecked){
+                    restart(mBluetoothDevice!!.address)
+                }
+            }
+        }
     }
 
     inner class ConnectedBluetoothThread(private val mmSocket: BluetoothSocket?) :Thread() {
@@ -150,7 +193,7 @@ class MainActivity : AppCompatActivity(), CircleProgressBar.ProgressFormatter{
     }
     fun getPatientInfo(mac : String){
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.0.65:80/")
+            .baseUrl("http://192.168.137.1:80/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -181,6 +224,70 @@ class MainActivity : AppCompatActivity(), CircleProgressBar.ProgressFormatter{
 
         })
     }
+
+    fun startMoter(mac : String){
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://192.168.137.1:80/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(RetrofitInterface::class.java)
+        var sendmac = HashMap<String, String>()
+        sendmac.put("mac", mac)
+
+        service.startMoter(sendmac).enqueue(object : Callback<getData>{
+            override fun onFailure(call: Call<getData>, t: Throwable) {
+                Log.d("CometChatAPI::", "Failed API call with call: ${call} exception: ${t}")
+            }
+
+            override fun onResponse(call: Call<getData>, response: Response<getData>) {
+                Log.e("get",response.body()!!.res)
+            }
+        })
+    }
+    fun callDoctor(mac : String){
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://192.168.137.1:80/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(RetrofitInterface::class.java)
+        var sendmac = HashMap<String, String>()
+        sendmac.put("mac", mac)
+
+        service.callDoctor(sendmac).enqueue(object : Callback<getData>{
+            override fun onFailure(call: Call<getData>, t: Throwable) {
+                Log.d("CometChatAPI::", "Failed API call with call: ${call} exception: ${t}")
+            }
+
+            override fun onResponse(call: Call<getData>, response: Response<getData>) {
+                Log.e("get",response.body()!!.res)
+            }
+        })
+    }
+
+
+    fun restart(mac : String){
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://192.168.137.1:80/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(RetrofitInterface::class.java)
+        var sendmac = HashMap<String, String>()
+        sendmac.put("mac", mac)
+
+        service.restart(sendmac).enqueue(object : Callback<getData>{
+            override fun onFailure(call: Call<getData>, t: Throwable) {
+                Log.d("CometChatAPI::", "Failed API call with call: ${call} exception: ${t}")
+            }
+
+            override fun onResponse(call: Call<getData>, response: Response<getData>) {
+                Log.e("get",response.body()!!.res)
+            }
+        })
+    }
+
 }
 
 
