@@ -8,10 +8,12 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,6 +36,8 @@ class Login : AppCompatActivity(), View.OnClickListener {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         var logo : ImageView = findViewById(R.id.logo)
+        var id_txt: TextView = findViewById(R.id.id_txt)
+        var pw_txt: TextView = findViewById(R.id.pw_txt)
         var qrbtn : Button = findViewById(R.id.qrbtn)
         var loginbtn : Button = findViewById(R.id.loginbtn)
 
@@ -58,10 +62,11 @@ class Login : AppCompatActivity(), View.OnClickListener {
             }
 
             R.id.loginbtn -> {
-                val intent = Intent(this, MainActivity::class.java)
+                /*val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-                finish()
+                finish()*/
                 //getPatientInfo("74:9E:F5:81:8F:49")
+                //callDoctor("74:9E:F5:81:8F:49")
             }
             R.id.logo -> {
                 bluetoothOn()
@@ -130,34 +135,7 @@ class Login : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    fun getPatientInfo(mac : String){
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.0.65:80/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
 
-        val service = retrofit.create(RetrofitInterface::class.java)
-        var sendmac = HashMap<String, String>()
-        sendmac.put("mac", mac)
-
-        service.getPatientInfo(sendmac).enqueue(object : Callback<List<PatientData>> {
-            override fun onFailure(call: Call<List<PatientData>>, t: Throwable) {
-                Log.d("CometChatAPI::", "Failed API call with call: ${call} exception: ${t}")
-            }
-
-            override fun onResponse(call: Call<List<PatientData>>, response: Response<List<PatientData>>) {
-                try{
-                    Log.e("get",response.body()!!.size.toString())
-                    for(i in 0..response.body()!!.size-1){
-                        Log.e("sfdsfsdfdsfsdfdsfsfsdfd", response.body()!!.get(i).toString())
-                    }
-                }catch (e : Exception){
-                    e.printStackTrace()
-                }
-            }
-
-        })
-    }
 
 
 }
