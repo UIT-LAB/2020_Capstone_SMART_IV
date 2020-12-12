@@ -29,4 +29,10 @@ interface RetrofitInterface {
     fun restart(
         @Body body: HashMap<String, String>
     ):Call<getData>
+
+    @Headers("accept: application/json","content-type: application/json")
+    @POST("/test/test")
+    fun loginss(
+        @Body body: HashMap<String, String>
+    ):Call<loginss>
 }

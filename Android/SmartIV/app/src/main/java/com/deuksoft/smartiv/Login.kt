@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
+import kotlinx.android.synthetic.main.activity_login.*
 import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
@@ -62,11 +63,7 @@ class Login : AppCompatActivity(), View.OnClickListener {
             }
 
             R.id.loginbtn -> {
-                /*val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()*/
-                //getPatientInfo("74:9E:F5:81:8F:49")
-                //callDoctor("74:9E:F5:81:8F:49")
+                login()
             }
             R.id.logo -> {
                 bluetoothOn()
@@ -96,28 +93,29 @@ class Login : AppCompatActivity(), View.OnClickListener {
 
                 if(scanningResult != null){
                     var contents : String = scanningResult.contents
-                    var format : String = scanningResult.formatName
-                    mPairedDevices = mBluetoothAdapter!!.getBondedDevices()
-                    //Toast.makeText(this, "$contents, $format", Toast.LENGTH_LONG).show()
-                   if(mPairedDevices!!.size > 0){
-                        for(tempDevice in mPairedDevices!!) {
-                            Log.e("addr : ", tempDevice.name)
-                            if (contents.equals(tempDevice.name)) {
-                                mBluetoothDevice = tempDevice
-                                Toast.makeText(this, "$contents, $format", Toast.LENGTH_LONG).show()
-                                val intent = Intent(this, MainActivity::class.java)
-                                intent.putExtra("PatientBluetooth", mBluetoothDevice)
-                                startActivity(intent)
-                                //finish()
-                                break
-                            }
-                        }
-                    }else{
-                       Toast.makeText(this, "일치하는 블루투스가 없습니다.", Toast.LENGTH_SHORT).show()
-                   }
-
+                    searchBlutooth(contents)
                 }
             }
+        }
+    }
+
+    fun searchBlutooth(contents : String){
+        mPairedDevices = mBluetoothAdapter!!.getBondedDevices()
+        //Toast.makeText(this, "$contents, $format", Toast.LENGTH_LONG).show()
+        if(mPairedDevices!!.size > 0){
+            for(tempDevice in mPairedDevices!!) {
+                Log.e("addr : ", tempDevice.name)
+                if (contents.equals(tempDevice.name)) {
+                    mBluetoothDevice = tempDevice
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("PatientBluetooth", mBluetoothDevice)
+                    startActivity(intent)
+                    //finish()
+                    break
+                }
+            }
+        }else{
+            Toast.makeText(this, "일치하는 블루투스가 없습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -135,7 +133,33 @@ class Login : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    fun login(){
+        var id : String = id_txt.text.toString()
+        var pw : String = pw_txt.text.toString()
 
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://192.168.159.1:3000/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val loginService = retrofit.create(RetrofitInterface::class.java)
+        var sendidpw = HashMap<String, String>()
+        sendidpw.put("id", id)
+        sendidpw.put("pw", pw)
+
+        loginService.loginss(sendidpw).enqueue(object : Callback<loginss>{
+            override fun onResponse(call: Call<loginss>, response: Response<loginss>) {
+                Log.e("get",response.body()!!.BlutoothMac)
+                var getMac =  response.body()!!.BlutoothMac
+                //searchBlutooth(getMac)
+            }
+
+            override fun onFailure(call: Call<loginss>, t: Throwable) {
+                Log.d("CometChatAPI::", "Failed API call with call: ${call} exception: ${t}")
+            }
+
+        })
+    }
 
 
 }
