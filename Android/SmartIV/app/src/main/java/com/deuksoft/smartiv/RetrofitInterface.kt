@@ -31,7 +31,7 @@ interface RetrofitInterface {
     ):Call<getData>
 
     @Headers("accept: application/json","content-type: application/json")
-    @POST("/test/test")
+    @POST("/login/android")
     fun loginss(
         @Body body: HashMap<String, String>
     ):Call<loginss>
