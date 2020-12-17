@@ -5,4 +5,4 @@ data class PatientData(var uid : String, var name : String, var birth : String, 
 
 data class getData(var res : String)
 
-data class loginss(var id : String, var pw : String, var BlutoothMac :String)
+data class loginss(var id : String, var pw : String, var BluetoothMac :String)

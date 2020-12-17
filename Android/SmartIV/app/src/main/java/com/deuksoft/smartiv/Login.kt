@@ -104,8 +104,8 @@ class Login : AppCompatActivity(), View.OnClickListener {
         //Toast.makeText(this, "$contents, $format", Toast.LENGTH_LONG).show()
         if(mPairedDevices!!.size > 0){
             for(tempDevice in mPairedDevices!!) {
-                Log.e("addr : ", tempDevice.name)
-                if (contents.equals(tempDevice.name)) {
+                Log.e("addr : ", tempDevice.address)
+                if (contents.equals(tempDevice.address)) {
                     mBluetoothDevice = tempDevice
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("PatientBluetooth", mBluetoothDevice)
@@ -138,7 +138,7 @@ class Login : AppCompatActivity(), View.OnClickListener {
         var pw : String = pw_txt.text.toString()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.159.1:3000/")
+            .baseUrl("http://192.168.137.1:80/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -149,9 +149,10 @@ class Login : AppCompatActivity(), View.OnClickListener {
 
         loginService.loginss(sendidpw).enqueue(object : Callback<loginss>{
             override fun onResponse(call: Call<loginss>, response: Response<loginss>) {
-                Log.e("get",response.body()!!.BlutoothMac)
-                var getMac =  response.body()!!.BlutoothMac
-                //searchBlutooth(getMac)
+                Log.e("get",response.body()!!.BluetoothMac)
+                var getMac =  response.body()!!.BluetoothMac
+                if(!getMac.equals("0"))
+                    searchBlutooth(getMac)
             }
 
             override fun onFailure(call: Call<loginss>, t: Throwable) {
